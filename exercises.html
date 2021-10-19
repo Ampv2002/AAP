@@ -5,22 +5,21 @@
     <meta name="viewport" content="width=device-width">
     <title>repl.it</title>
     <link href="../style.css" rel="stylesheet" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="menu" id="mainMenu">
       <ul>
         <li><a href="index.html" class="menu-item">GET </a></li>
         <li><a href="set.html" class="menu-item">SET </a></li>
-        <li><a href="create.html" class="menu-item">Create / remove</a></li>
+        <li><a href="create.html" class="menu-item">Create / remove </a></li>
         <li><a href="classes.html" class="menu-item">Style classes </a></li>
         <li><a href="events.html" class="menu-item">Events </a></li>
         <li><a href="exercises.html" class="menu-item">Exercises </a></li>
-        <li><a href="#" class="menu-item">jQuery </a></li>
-      </ul> 
-    </div> 
+        <li><a href="#" class="menu-item">DOM </a></li>
+      </ul>
+    </div>
 
-    <h2 id="header">jQuery Exercises </h2>
+    <h2 id="header">DOM Exercises </h2>
 
     <div class="spaced">
       <input type="text" id="name"/>
@@ -39,36 +38,45 @@
     <span id="result">Result: </span>
 
     <script>
-      //1
-      let header = $("#namesHeader");
-      $(header).css({"color":"blue"});
-      
-      //2
-      //$("#mainMenu").attr('class', 'menu-clear');
-      $("#mainMenu").addClass("menu-clear");
-      $("#mainMenu").removeClass("menu-clear");
-      
-      //3
-      //$("body").append("Added paragraph text")
-      let paragraph = $("<p></p>").text("Added paragraph text");
-      $("body").append(paragraph);
+     //1
+     let headerchange = document.getElementById("namesHeader");
+     headerchange.style.color = "blue";
 
-      //4
-      let menuItens = $("a");
-      $("#result").append(menuItens);
+     //2
+     document.getElementById('mainMenu').classList.add('menu-clear');
+     document.getElementById('mainMenu').classList.remove('menu');
 
-      //5
-      $("#btn1").click(function(){
-        var texto = $('#name').val()
-        console.log(texto)
+     //3
+    // const text = document.createTextNode("Added paragraph text");
+     //document.body.appendChild(text)
+      let paragraph = document.createElement("p");
+      paragraph.textContent = "Added paragraph text";
+      document.body.appendChild(paragraph);
+     //4
+      let menuItens = document.querySelectorAll(".menu-item");
+      console.log(menuItens);
+      let span = document.getElementById("result");
+      menuItens.forEach(element => {
+        span.appendChild(element);
       });
 
-      //6
-      $("#btn2").click(function(){
-        $("#nameList ul")
-        .append($("<li></li>")
-        .text($("#name2").val()))
-      });
+     //5
+     var btn = document.querySelector('#btn1');
+     btn.onclick = function(){
+       var texto = document.getElementById("name").value;
+       console.log(texto);
+     }
+
+     //6
+     let btn2 = document.querySelector("#btn2");
+      btn2.onclick = function(){
+        let input = document.querySelector("#name2");
+        let ul = document.querySelector("#nameList > ul");
+        let li = document.createElement("li");
+        li.textContent = input.value;
+        ul.appendChild(li);
+      }     
+
     </script>
 
   </body>
